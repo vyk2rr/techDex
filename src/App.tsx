@@ -1,28 +1,40 @@
-import {
-  createBrowserRouter,
-  RouterProvider
-} from "react-router-dom"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
-import Product from "./product.tsx";
+import { loadPaginatedPokemons, loadPokemonDetailsById } from './helper/poke_api_handler'
+
+import PokeLayout from './components/poke-dex-layout'
+import Index from "./components/index"
+import PokemonDetails from './components/pokemon-details'
 
 import './App.css'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <>Just an index!</>,
-    errorElement: <>Errorrrrr</>
-  },
-  {
-    path: "/products/:productId",
-    element: <Product />
+    element: <PokeLayout />,
+    loader: loadPaginatedPokemons,
+    errorElement: <>Errorrrrr</>,
+    children: [
+      {
+        index: true,
+        element: <Index />
+      },
+      {
+        path: '/pokemon-preview/:pokemonId',
+        loader: ({ params: { pokemonId } }) => {
+          if (!pokemonId) { return; }
+          
+          const id = parseInt(pokemonId)
+          return loadPokemonDetailsById(id)
+        },
+        element: <PokemonDetails />
+      }
+    ]
   }
 ]);
 
 function App() {
-  return (
-    <RouterProvider router={router} />
-  )
+  return <RouterProvider router={router} />
 }
 
-export default App
+export default App;
