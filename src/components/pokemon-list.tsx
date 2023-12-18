@@ -24,7 +24,9 @@ export default function PokemonList(): React.ReactNode {
         const pokemonIdMatches = /\/([0-9]+)\//.exec(pokemon.url)
         if (pokemonIdMatches == null) return;
         const pokemonId = parseInt(pokemonIdMatches[1])
-
+        if (pokemonId > 151) {
+          return;
+        }
         return (
           <li key={`pokemon${pokemonId}`}>
             <Link to={`/pokemon-preview/${pokemonId}`} onDoubleClick={() =>
