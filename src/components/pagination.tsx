@@ -1,6 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
 import { PaginatedPokemonsAPIResponse } from '../helper/poke-api-handler';
 import { fetchNextPage } from '../helper/poke-api-handler'
+import { getOffsetFromUrl } from '../helper/pokedex-helper';
 import { useAppDispatch, useAppSelector } from '../hooks';
 
 export default function Pagination(): React.ReactNode {
@@ -12,8 +13,7 @@ export default function Pagination(): React.ReactNode {
   const previous_url = previous || loaderData.previous
   const next_url = next || loaderData.next
 
-  const offsetMatches = /offset=([0-9]+)/.exec(next_url)
-  const offset = offsetMatches && parseInt(offsetMatches[1]) || 0
+  const offset = getOffsetFromUrl(next_url)
   
   const dispatch = useAppDispatch()
 

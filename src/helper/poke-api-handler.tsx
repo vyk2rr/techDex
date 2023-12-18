@@ -13,12 +13,12 @@ export interface PaginatedPokemonsAPIResponse {
   results: Array<PokemonListItem>
 }
 
-interface PAbility {
+interface PokemonAbility {
   name: string
 }
 
-interface PokemonAbility {
-  ability: PAbility,
+interface PokemonAbilities {
+  ability: PokemonAbility,
   is_hidden: boolean,
   slot: number
 }
@@ -41,7 +41,7 @@ interface PokemonStat { }
 interface PokemonType { }
 
 export interface PokemonByIdAPIResponse {
-  abilities: PokemonAbility[]
+  abilities: PokemonAbilities[]
   base_experience: number
   forms: PokemonForm[]
   game_indices: PokemonIndex[]

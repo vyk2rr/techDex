@@ -1,6 +1,7 @@
 import { useLoaderData, Link, useNavigate } from 'react-router-dom';
 import { PaginatedPokemonsAPIResponse, PokemonListItem } from './../helper/poke-api-handler'
 import { useAppSelector } from '../hooks';
+import { getIdFromUrl } from '../helper/pokedex-helper';
 
 export default function PokemonList(): React.ReactNode {
   const pokemonsFromLoader: PaginatedPokemonsAPIResponse = useLoaderData() as PaginatedPokemonsAPIResponse
@@ -15,18 +16,13 @@ export default function PokemonList(): React.ReactNode {
     pokemons = pokemonsFromLoader.results
   }
 
-  const firstIdMatches = /\/([0-9]+)\//.exec(pokemons[0].url)
-  const startId = firstIdMatches && parseInt(firstIdMatches[1])
+  const startId = getIdFromUrl(pokemons[0].url)
 
   return (
     <ol start={startId || 1}>
       {pokemons && pokemons.map((pokemon: PokemonListItem) => {
-        const pokemonIdMatches = /\/([0-9]+)\//.exec(pokemon.url)
-        if (pokemonIdMatches == null) return;
-        const pokemonId = parseInt(pokemonIdMatches[1])
-        if (pokemonId > 151) {
-          return;
-        }
+        const pokemonId = getIdFromUrl(pokemon.url)
+        if (pokemonId && pokemonId > 151) { return; }
         return (
           <li key={`pokemon${pokemonId}`}>
             <Link to={`/pokemon-preview/${pokemonId}`} onDoubleClick={() =>
