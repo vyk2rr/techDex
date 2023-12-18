@@ -1,18 +1,22 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
-import { loadPaginatedPokemons, loadPokemonDetailsById } from './helper/poke_api_handler'
+import { loadFirstPageOfPokemons, loadPokemonDetailsById } from './helper/poke-api-handler'
 
-import PokeLayout from './components/poke-dex-layout'
+import { Provider } from "react-redux"
+import { store } from './store'
+
+import PokeDexRoot from './components/poke-dex-root'
 import Index from "./components/index"
-import PokemonDetails from './components/pokemon-details'
+import PokemonPreview from './components/pokemon-preview'
+import PokemonFullPreview from './components/pokemon-full-preview'
 
-import './App.css'
+import './App.css';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <PokeLayout />,
-    loader: loadPaginatedPokemons,
+    element: <PokeDexRoot />,
+    loader: loadFirstPageOfPokemons,
     errorElement: <>Errorrrrr</>,
     children: [
       {
@@ -21,20 +25,48 @@ const router = createBrowserRouter([
       },
       {
         path: '/pokemon-preview/:pokemonId',
-        loader: ({ params: { pokemonId } }) => {
-          if (!pokemonId) { return; }
-          
+        loader: async ({ params: { pokemonId } }) => {
+          if (pokemonId === undefined) {
+            throw new Error('Pokemon Not Found');
+          }
+
           const id = parseInt(pokemonId)
+
+          if (id <= 0) {
+            throw new Error('Pokemon Not Found');
+          }
+
           return loadPokemonDetailsById(id)
         },
-        element: <PokemonDetails />
+        element: <PokemonPreview />
+      },
+      {
+        path: '/pokemon-full-preview/:pokemonId',
+        loader: async ({ params: { pokemonId } }) => {
+          if (pokemonId === undefined) {
+            throw new Error('Pokemon Not Found');
+          }
+
+          const id = parseInt(pokemonId)
+
+          if (id <= 0) {
+            throw new Error('Pokemon Not Found');
+          }
+
+          return loadPokemonDetailsById(id)
+        },
+        element: <PokemonFullPreview />
       }
     ]
   }
 ]);
 
 function App() {
-  return <RouterProvider router={router} />
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  )
 }
 
 export default App;
