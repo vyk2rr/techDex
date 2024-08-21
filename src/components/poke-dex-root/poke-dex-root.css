@@ -1,0 +1,27 @@
+.layout {
+  display: grid;
+  grid-template-rows: auto 1fr; /* First row for pagination, second for list and outlet */
+  grid-template-columns: 1fr 3fr; /* Two columns, second one wider for the outlet */
+  gap: 20px; /* Space between grid items */
+  padding: 20px; /* Padding around the grid */
+}
+
+#sidebar {
+  display: grid;
+  grid-template-rows: auto 1fr; /* Pagination on top, Pokémon list below */
+  gap: 10px; /* Space between pagination and list */
+}
+
+#pagination {
+  grid-row: 1; /* Place pagination in the first row */
+}
+
+#pokemon-list {
+  grid-row: 2; /* Place Pokémon list in the second row */
+}
+
+/* Ensure Outlet takes up the rest of the space */
+.outlet {
+  grid-column: 2; /* Place Outlet in the second column */
+  grid-row: 1 / 3; /* Span from first to last row */
+}

@@ -1,11 +1,11 @@
 import { useLoaderData } from "react-router-dom";
-import { PokemonByIdAPIResponse } from '../helper/poke-api-handler'
+import { PokemonByIdAPIResponse } from '../../helper/poke-api-handler'
 
 export default function PokemonPreview(): JSX.Element {
   const pokemon: PokemonByIdAPIResponse = useLoaderData() as PokemonByIdAPIResponse
 
   return (
-    <>
+    <div className="pokemon-details">
       <h2>{pokemon.name} - full details</h2>
 
       <img src={`${pokemon.sprites.back_default}`} />
@@ -26,6 +26,6 @@ export default function PokemonPreview(): JSX.Element {
         {pokemon.forms.map(({ name }) => <li>{name}</li>)}
       </ol>
 
-    </>
+    </div>
   );
 }

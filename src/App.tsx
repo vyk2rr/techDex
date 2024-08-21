@@ -5,10 +5,10 @@ import { loadFirstPageOfPokemons, loadPokemonDetailsById } from './helper/poke-a
 import { Provider } from "react-redux"
 import { store } from './store'
 
-import PokeDexRoot from './components/poke-dex-root'
+import PokeDexRoot from './components/poke-dex-root/poke-dex-root'
 import Index from "./components/index"
-import PokemonPreview from './components/pokemon-preview'
-import PokemonFullPreview from './components/pokemon-full-preview'
+import PokemonPreview from './components/pokemon-preview/pokemon-preview'
+import PokemonFullPreview from './components/pokemon-full-preview/pokemon-full-preview'
 
 import './App.css';
 

@@ -1,7 +1,8 @@
 import { useLoaderData, Link, useNavigate } from 'react-router-dom';
-import { PaginatedPokemonsAPIResponse, PokemonListItem } from './../helper/poke-api-handler'
-import { useAppSelector } from '../hooks';
-import { getIdFromUrl } from '../helper/pokedex-helper';
+import { PaginatedPokemonsAPIResponse, PokemonListItem } from '../../helper/poke-api-handler'
+import { useAppSelector } from '../../hooks';
+import { getIdFromUrl } from '../../helper/pokedex-helper';
+import './pokemon-list.css';
 
 export default function PokemonList(): React.ReactNode {
   const pokemonsFromLoader: PaginatedPokemonsAPIResponse = useLoaderData() as PaginatedPokemonsAPIResponse
@@ -19,7 +20,7 @@ export default function PokemonList(): React.ReactNode {
   const startId = getIdFromUrl(pokemons[0].url)
 
   return (
-    <ol start={startId || 1}>
+    <ol start={startId || 1} className='pokemon-list'>
       {pokemons && pokemons.map((pokemon: PokemonListItem) => {
         const pokemonId = getIdFromUrl(pokemon.url)
         if (pokemonId && pokemonId > 151) { return; }

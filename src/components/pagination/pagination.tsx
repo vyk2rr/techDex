@@ -1,8 +1,9 @@
 import { useLoaderData } from 'react-router-dom';
-import { PaginatedPokemonsAPIResponse } from '../helper/poke-api-handler';
-import { fetchNextPage } from '../helper/poke-api-handler'
-import { getOffsetFromUrl } from '../helper/pokedex-helper';
-import { useAppDispatch, useAppSelector } from '../hooks';
+import { PaginatedPokemonsAPIResponse } from '../../helper/poke-api-handler';
+import { fetchNextPage } from '../../helper/poke-api-handler'
+import { getOffsetFromUrl } from '../../helper/pokedex-helper';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import './pagination.css';
 
 export default function Pagination(): React.ReactNode {
   const loaderData: PaginatedPokemonsAPIResponse = useLoaderData() as PaginatedPokemonsAPIResponse
@@ -33,12 +34,14 @@ export default function Pagination(): React.ReactNode {
       <button
         onClick={() => goToPreviousPage(previous_url)}
         disabled={isPreviousPageDisabled}
+        className='Button'
       >
         Previous
       </button>
       <button
         onClick={() => goToNextPage(next_url)}
         disabled={isNextPageDisabled}
+        className='Button'
       >
         Next
       </button>
