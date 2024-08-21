@@ -1,0 +1,27 @@
+.Button {
+  border: none; /* No border for a cleaner look */
+  border-radius: 12px; /* Sleek rounded corners */
+  background: linear-gradient(145deg, #1e1e1e, #3a3a3a); /* Dark gradient for depth */
+  color: #00cfff; /* Neon cyan text color */
+  padding: 12px 24px; /* Spacious padding */
+  font-family: 'Orbitron', sans-serif; /* Futuristic font */
+  font-size: 16px; /* Slightly larger text */
+  text-align: center; /* Center the text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Fit content */
+  box-shadow: 0 4px 6px rgba(0, 255, 255, 0.3), 0 1px 3px rgba(0, 255, 255, 0.3); /* Neon glow effect */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background 0.3s, transform 0.3s; /* Smooth transition */
+  margin-right: 10px;
+}
+
+.Button:hover {
+  background: linear-gradient(145deg, #3a3a3a, #1e1e1e); /* Inverted gradient on hover */
+  color: #ffffff; /* White text color on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  box-shadow: 0 6px 12px rgba(0, 255, 255, 0.5), 0 2px 4px rgba(0, 255, 255, 0.4); /* Enhanced neon glow */
+}
+
+button:last-child {
+    margin-right: 0;
+}
